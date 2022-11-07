@@ -1,0 +1,71 @@
+{
+    "name": "CopyPipelineff",
+    "properties": {
+        "activities": [
+            {
+                "name": "Copy_7om",
+                "type": "Copy",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "0.12:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [
+                    {
+                        "name": "Source",
+                        "value": "bronze1//BIKE DETAILS.csv"
+                    },
+                    {
+                        "name": "Destination",
+                        "value": "bronze1//bike_details.csv"
+                    }
+                ],
+                "typeProperties": {
+                    "source": {
+                        "type": "DelimitedTextSource",
+                        "storeSettings": {
+                            "type": "AzureBlobStorageReadSettings",
+                            "recursive": true,
+                            "enablePartitionDiscovery": false
+                        },
+                        "formatSettings": {
+                            "type": "DelimitedTextReadSettings",
+                            "skipLineCount": 0
+                        }
+                    },
+                    "sink": {
+                        "type": "DelimitedTextSink",
+                        "storeSettings": {
+                            "type": "AzureBlobFSWriteSettings"
+                        },
+                        "formatSettings": {
+                            "type": "DelimitedTextWriteSettings",
+                            "quoteAllText": true,
+                            "fileExtension": ".txt"
+                        }
+                    },
+                    "enableStaging": false,
+                    "validateDataConsistency": false
+                },
+                "inputs": [
+                    {
+                        "referenceName": "SourceDataset_7om",
+                        "type": "DatasetReference"
+                    }
+                ],
+                "outputs": [
+                    {
+                        "referenceName": "DestinationDataset_7om",
+                        "type": "DatasetReference"
+                    }
+                ]
+            }
+        ],
+        "annotations": [],
+        "lastPublishTime": "2022-11-02T14:40:13Z"
+    },
+    "type": "Microsoft.DataFactory/factories/pipelines"
+}
